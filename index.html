@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xnance Proof of Concept</title>
     <link rel="stylesheet" href="style.css">
-    <script src="app1.js" defer></script> <!-- Corrected to app1.js -->
+    <script src="app1.js" defer></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,10 +24,10 @@
             border-radius: 10px;
             display: none;
         }
-        #registration-section, #menu-section, #voting-section, #thank-you-message, #blog-section, #nft-section {
+        #registration-section, #menu-section, #voting-section, #thank-you-message, #blog-section, #nft-section, #blockchain-section, #wallet-balance-section {
             display: none;
         }
-        #thank-you-message, #blog-section, #nft-section {
+        #thank-you-message, #blog-section, #nft-section, #wallet-balance-section {
             font-size: 18px;
             color: green;
         }
@@ -86,6 +86,9 @@
         <div class="menu-option" id="participate-vote">Participate in Club Vote</div>
         <div class="menu-option" id="participate-blog">Participate in Blog</div>
         <div class="menu-option" id="nft-option">Buy or Create an NFT</div>
+        <div class="menu-option" id="view-balance">View Wallet Balance</div>
+        <div class="menu-option" id="view-transactions">View Transaction History</div>
+        <div class="menu-option" id="token-transfer">Send a Token</div>
     </div>
 
     <!-- Voting Section -->
@@ -107,6 +110,31 @@
     <div id="nft-section">
         <h3>Buy or Create an NFT</h3>
         <p>This is a mimic NFT marketplace for demonstration purposes.</p>
+        <span class="return-menu">Return to Menu</span>
+    </div>
+
+    <!-- Blockchain Section: Wallet Balance -->
+    <div id="wallet-balance-section">
+        <h3>Your Wallet Balance</h3>
+        <p id="wallet-balance">Balance: </p>
+        <span class="return-menu">Return to Menu</span>
+    </div>
+
+    <!-- Blockchain Section: Transaction History -->
+    <div id="transaction-history-section">
+        <h3>Your Transaction History</h3>
+        <ul id="transaction-list"></ul>
+        <span class="return-menu">Return to Menu</span>
+    </div>
+
+    <!-- Blockchain Section: Token Transfer -->
+    <div id="token-transfer-section">
+        <h3>Send a Token</h3>
+        <label for="recipient-address">Recipient Address:</label>
+        <input type="text" id="recipient-address" placeholder="0x..."><br><br>
+        <label for="transfer-amount">Amount to Send:</label>
+        <input type="text" id="transfer-amount" placeholder="Amount"><br><br>
+        <button id="send-token-btn">Send Token</button>
         <span class="return-menu">Return to Menu</span>
     </div>
 

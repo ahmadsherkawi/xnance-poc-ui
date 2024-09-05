@@ -97,11 +97,60 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('nft-section').style.display = 'block';
     }
 
+    // Show wallet balance
+    async function showWalletBalance() {
+        document.getElementById('menu-section').style.display = 'none';
+        document.getElementById('wallet-balance-section').style.display = 'block';
+
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const balance = await signer.getBalance();
+        const balanceInEth = ethers.utils.formatEther(balance);
+
+        document.getElementById('wallet-balance').innerText = `Balance: ${balanceInEth} ETH`;
+    }
+
+    // Show transaction history (mock data for now)
+    function showTransactionHistory() {
+        document.getElementById('menu-section').style.display = 'none';
+        document.getElementById('transaction-history-section').style.display = 'block';
+
+        const transactions = [
+            "0xTransaction1",
+            "0xTransaction2",
+            "0xTransaction3"
+        ];
+
+        const transactionList = document.getElementById('transaction-list');
+        transactionList.innerHTML = ""; // Clear existing entries
+
+        transactions.forEach(tx => {
+            const li = document.createElement('li');
+            li.innerText = tx;
+            transactionList.appendChild(li);
+        });
+    }
+
+    // Handle token transfer (simulated)
+    function sendToken() {
+        const recipient = document.getElementById('recipient-address').value;
+        const amount = document.getElementById('transfer-amount').value;
+
+        console.log(`Sending ${amount} tokens to ${recipient}`);
+        alert(`Token sent to ${recipient} successfully!`);
+
+        // Return to menu after sending
+        returnToMenu();
+    }
+
     // Return to menu from any section
     function returnToMenu() {
         document.getElementById('voting-section').style.display = 'none';
         document.getElementById('blog-section').style.display = 'none';
         document.getElementById('nft-section').style.display = 'none';
+        document.getElementById('wallet-balance-section').style.display = 'none';
+        document.getElementById('transaction-history-section').style.display = 'none';
+        document.getElementById('token-transfer-section').style.display = 'none';
         document.getElementById('thank-you-message').style.display = 'none';
         document.getElementById('menu-section').style.display = 'block';
     }
@@ -110,10 +159,15 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('participate-vote').addEventListener('click', showVoting);
     document.getElementById('participate-blog').addEventListener('click', showBlog);
     document.getElementById('nft-option').addEventListener('click', showNftSection);
+    document.getElementById('view-balance').addEventListener('click', showWalletBalance);
+    document.getElementById('view-transactions').addEventListener('click', showTransactionHistory);
+    document.getElementById('token-transfer').addEventListener('click', () => {
+        document.getElementById('menu-section').style.display = 'none';
+        document.getElementById('token-transfer-section').style.display = 'block';
+    });
 
-    // Event listeners for voting
-    document.getElementById('vote-jersey1').addEventListener('click', function () { vote('Jersey 1'); });
-    document.getElementById('vote-jersey2').addEventListener('click', function () { vote('Jersey 2'); });
+    // Event listener for sending token
+    document.getElementById('send-token-btn').addEventListener('click', sendToken);
 
     // Event listeners for returning to menu
     const returnMenuLinks = document.querySelectorAll('.return-menu');
