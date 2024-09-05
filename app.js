@@ -149,9 +149,10 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log('Contract instantiated:', contract);
 
         try {
-            const value = await contract.despToken(); // Replace with an actual function call
-            console.log('Contract Value:', value);
-            document.getElementById('contract-value').innerText = value;
+            // Example call to a read function
+            const despTokenAddress = await contract.despToken();
+            console.log('DeSp Token Address:', despTokenAddress);
+            document.getElementById('contract-value').innerText = despTokenAddress;
         } catch (error) {
             console.error('Error interacting with contract:', error);
         }
