@@ -9,6 +9,24 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('aps-score').innerText = "APS Score: " + apsScore;
     }
 
+    // Show the registration form when the page loads
+    document.getElementById('registration-section').style.display = 'block';
+
+    // Handle registration form submission
+    document.getElementById('registration-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const fullName = document.getElementById('full-name').value;
+        const favoriteClub = document.getElementById('favorite-club').value;
+
+        console.log('Full Name:', fullName);
+        console.log('Favorite Club:', favoriteClub);
+
+        // Hide registration form and show the Connect Wallet button
+        document.getElementById('registration-section').style.display = 'none';
+        document.getElementById('connect-wallet-btn').style.display = 'block';
+    });
+
     // Check if MetaMask is installed
     if (typeof window.ethereum !== 'undefined') {
         console.log('MetaMask is installed!');
@@ -30,6 +48,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Show the voting section
             document.getElementById('voting-section').style.display = 'block';
+
+            // Hide the Connect Wallet button after connecting
+            document.getElementById('connect-wallet-btn').style.display = 'none';
+
         } catch (error) {
             console.error('Error connecting wallet:', error);
         }
@@ -54,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('thank-you-message').style.display = 'block';
     }
 
-    // Event listeners for buttons
+    // Event listeners for wallet connection and voting
     document.getElementById('connect-wallet-btn').addEventListener('click', connectWallet);
     document.getElementById('vote-jersey1').addEventListener('click', function () { vote('Jersey 1'); });
     document.getElementById('vote-jersey2').addEventListener('click', function () { vote('Jersey 2'); });

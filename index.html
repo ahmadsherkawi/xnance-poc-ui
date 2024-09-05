@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xnance Proof of Concept</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
     <script src="app1.js" defer></script>
     <style>
         body {
@@ -24,14 +23,10 @@
             padding: 5px 15px;
             border-radius: 10px;
         }
-        #voting-section {
+        #registration-section, #connect-wallet-btn, #voting-section, #thank-you-message {
             display: none;
-            margin-top: 20px;
-            text-align: center;
         }
         #thank-you-message {
-            display: none;
-            margin-top: 20px;
             font-size: 18px;
             color: green;
         }
@@ -46,6 +41,26 @@
 
     <!-- APS Score Display -->
     <div id="aps-score">APS Score: 0</div>
+
+    <!-- Registration Section -->
+    <div id="registration-section">
+        <h3>Register</h3>
+        <form id="registration-form">
+            <label for="full-name">Full Name:</label>
+            <input type="text" id="full-name" name="full-name" required><br><br>
+
+            <label for="favorite-club">Favorite Club:</label>
+            <select id="favorite-club" name="favorite-club" required>
+                <option value="FootyFooty">FootyFooty</option>
+                <option value="Royal Footy">Royal Footy</option>
+                <option value="GoalMasters">GoalMasters</option>
+                <option value="KickWonders">KickWonders</option>
+                <option value="FootyLegends">FootyLegends</option>
+            </select><br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 
     <!-- Wallet Connection -->
     <button id="connect-wallet-btn">Connect Wallet</button>
