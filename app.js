@@ -40,10 +40,11 @@ document.addEventListener("DOMContentLoaded", function () {
             const contract = new ethers.Contract(contractAddress, contractABI, signer);
             console.log('Contract instantiated:', contract);
 
-            // Example interaction: Initiating a transfer
+            // Use your wallet address for both fromClub and toClub
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             const playerId = 1; 
-            const fromClub = '0xYourClubAddress'; // Replace with actual club address
-            const toClub = '0xAnotherClubAddress'; // Replace with actual club address
+            const fromClub = accounts[0]; // Your wallet address
+            const toClub = accounts[0]; // Same wallet address for trial
             const amount = ethers.utils.parseUnits("10", "ether");
 
             await contract.initiateTransfer(playerId, fromClub, toClub, amount);
