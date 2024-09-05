@@ -6,16 +6,59 @@
     <title>Xnance Proof of Concept</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-    <script src="app.js" defer></script>
+    <script src="app1.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #logo {
+            text-align: center;
+            margin: 20px;
+        }
+        #aps-score {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 18px;
+            background-color: #f4f4f4;
+            padding: 5px 15px;
+            border-radius: 10px;
+        }
+        #voting-section {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        #thank-you-message {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+    </style>
 </head>
 <body>
-    <h1>Xnance Proof of Concept</h1>
+    <div id="logo">
+        <img src="fulllogo.jpg" alt="Xnance Logo" width="300">
+    </div>
+
+    <h1 style="text-align: center;">Xnance Proof of Concept</h1>
+
+    <!-- APS Score Display -->
+    <div id="aps-score">APS Score: 0</div>
+
+    <!-- Wallet Connection -->
     <button id="connect-wallet-btn">Connect Wallet</button>
     <p id="wallet-address">Connected Wallet Address: </p>
 
-    <button id="init-contract-btn">Initialize Contract</button>
-    <!-- Ensure this paragraph is visible and will be updated -->
-    <p id="contract-value">Contract Value: <span id="contract-value-message"></span></p>
+    <!-- Voting Section -->
+    <div id="voting-section">
+        <h3>Which Jersey do you like more?</h3>
+        <button id="vote-jersey1">Jersey 1</button>
+        <button id="vote-jersey2">Jersey 2</button>
+    </div>
+
+    <!-- Thank You Message -->
+    <div id="thank-you-message">Thank you for voting!</div>
 </body>
 </html>
-
