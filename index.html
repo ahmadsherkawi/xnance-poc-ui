@@ -2,21 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xnance Proof of Concept</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <script src="app.js" defer></script>
 </head>
 <body>
     <h1>Xnance Proof of Concept</h1>
-
     <button id="connect-wallet-btn">Connect Wallet</button>
-    <p>Connected Wallet Address: <span id="wallet-address"></span></p>
+    <p id="wallet-address">Connected Wallet Address: </p>
 
     <button id="init-contract-btn">Initialize Contract</button>
-    <p>Contract Value: <span id="contract-value"></span></p>
-
-    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
-    <script src="app.js"></script>
+    <p id="contract-value">Contract Value: </p>
 </body>
 </html>
