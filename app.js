@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Interact with deployed smart contracts
     async function initContracts() {
+        console.log('Initializing contract interaction...');
+        
         // Replace with your contract's ABI and address
         const contractABI = [
             {
@@ -138,14 +140,16 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         ];
 
-        const contractAddress = '0x405f1F0f5264a8f3ebDC1DeFe2d4e19F90E1f31A';  // Replace with your actual deployed contract address
+        const contractAddress = '0xF69b6d416F2d1E82A2F6C85fF710c1cC0A774BE8';  // Your actual deployed contract address
 
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const contract = new ethers.Contract(contractAddress, contractABI, signer);
 
+        console.log('Contract instantiated:', contract);
+
         try {
-            const value = await contract.despToken(); // Example function call
+            const value = await contract.despToken(); // Replace with an actual function call
             console.log('Contract Value:', value);
             document.getElementById('contract-value').innerText = value;
         } catch (error) {
