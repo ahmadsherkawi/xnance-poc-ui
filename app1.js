@@ -17,9 +17,11 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault();
 
         const fullName = document.getElementById('full-name').value;
+        const email = document.getElementById('email').value;
         const favoriteClub = document.getElementById('favorite-club').value;
 
         console.log('Full Name:', fullName);
+        console.log('Email:', email);
         console.log('Favorite Club:', favoriteClub);
 
         // Hide registration form and show the Connect Wallet button
@@ -46,7 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
             apsScore += 1;
             updateApsScore();
 
-            // Show the main menu
+            // Show the main menu and APS score
+            document.getElementById('aps-score').style.display = 'block';
             document.getElementById('menu-section').style.display = 'block';
 
             // Hide the Connect Wallet button after connecting
@@ -112,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('vote-jersey1').addEventListener('click', function () { vote('Jersey 1'); });
     document.getElementById('vote-jersey2').addEventListener('click', function () { vote('Jersey 2'); });
 
-    // Event listeners for return to menu
+    // Event listeners for returning to menu
     const returnMenuLinks = document.querySelectorAll('.return-menu');
     returnMenuLinks.forEach(link => {
         link.addEventListener('click', returnToMenu);
