@@ -79,8 +79,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error('Insufficient token allowance for contract to perform transfer');
                 document.getElementById('contract-value-message').innerText = 'Insufficient token allowance. Approving tokens...';
 
-                // Approve the contract to spend tokens
-                const tx = await despTokenContract.approve(playerTransferContract.address, amount);
+                // Approve the contract to spend tokens with a manually set gas limit
+                const tx = await despTokenContract.approve(playerTransferContract.address, amount, { gasLimit: 100000 });
                 await tx.wait();
                 console.log('Tokens approved for transfer.');
 
@@ -88,8 +88,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById('contract-value-message').innerText = 'Tokens approved for transfer.';
             }
 
-            // Now that tokens are approved, initiate the transfer
-            await playerTransferContract.initiateTransfer(playerId, fromClub, toClub, amount);
+            // Now that tokens are approved, initiate the transfer with a manually set gas limit
+            await playerTransferContract.initiateTransfer(playerId, fromClub, toClub, amount, { gasLimit: 100000 });
             console.log('Player transfer initiated.');
             document.getElementById('contract-value-message').innerText = 'Player transfer initiated.';
 
