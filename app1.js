@@ -46,8 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
             apsScore += 1;
             updateApsScore();
 
-            // Show the voting section
-            document.getElementById('voting-section').style.display = 'block';
+            // Show the main menu
+            document.getElementById('menu-section').style.display = 'block';
 
             // Hide the Connect Wallet button after connecting
             document.getElementById('connect-wallet-btn').style.display = 'none';
@@ -76,8 +76,48 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('thank-you-message').style.display = 'block';
     }
 
-    // Event listeners for wallet connection and voting
-    document.getElementById('connect-wallet-btn').addEventListener('click', connectWallet);
+    // Show voting section
+    function showVoting() {
+        document.getElementById('menu-section').style.display = 'none';
+        document.getElementById('voting-section').style.display = 'block';
+    }
+
+    // Show blog section
+    function showBlog() {
+        document.getElementById('menu-section').style.display = 'none';
+        document.getElementById('blog-section').style.display = 'block';
+    }
+
+    // Show NFT section
+    function showNftSection() {
+        document.getElementById('menu-section').style.display = 'none';
+        document.getElementById('nft-section').style.display = 'block';
+    }
+
+    // Return to menu from any section
+    function returnToMenu() {
+        document.getElementById('voting-section').style.display = 'none';
+        document.getElementById('blog-section').style.display = 'none';
+        document.getElementById('nft-section').style.display = 'none';
+        document.getElementById('thank-you-message').style.display = 'none';
+        document.getElementById('menu-section').style.display = 'block';
+    }
+
+    // Event listeners for menu options
+    document.getElementById('participate-vote').addEventListener('click', showVoting);
+    document.getElementById('participate-blog').addEventListener('click', showBlog);
+    document.getElementById('nft-option').addEventListener('click', showNftSection);
+
+    // Event listeners for voting
     document.getElementById('vote-jersey1').addEventListener('click', function () { vote('Jersey 1'); });
     document.getElementById('vote-jersey2').addEventListener('click', function () { vote('Jersey 2'); });
+
+    // Event listeners for return to menu
+    const returnMenuLinks = document.querySelectorAll('.return-menu');
+    returnMenuLinks.forEach(link => {
+        link.addEventListener('click', returnToMenu);
+    });
+
+    // Event listener for wallet connection
+    document.getElementById('connect-wallet-btn').addEventListener('click', connectWallet);
 });

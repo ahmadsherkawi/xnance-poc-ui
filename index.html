@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xnance Proof of Concept</title>
     <link rel="stylesheet" href="style.css">
-    <script src="app1.js" defer></script>
+    <script src="app2.js" defer></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,12 +23,22 @@
             padding: 5px 15px;
             border-radius: 10px;
         }
-        #registration-section, #connect-wallet-btn, #voting-section, #thank-you-message {
+        #registration-section, #menu-section, #voting-section, #thank-you-message, #blog-section, #nft-section {
             display: none;
         }
-        #thank-you-message {
+        #thank-you-message, #blog-section, #nft-section {
             font-size: 18px;
             color: green;
+        }
+        .menu-option {
+            margin: 10px;
+            cursor: pointer;
+        }
+        .return-menu {
+            margin-top: 20px;
+            color: blue;
+            cursor: pointer;
+            display: block;
         }
     </style>
 </head>
@@ -66,11 +76,34 @@
     <button id="connect-wallet-btn">Connect Wallet</button>
     <p id="wallet-address">Connected Wallet Address: </p>
 
+    <!-- Menu Section -->
+    <div id="menu-section">
+        <h3>What would you like to do?</h3>
+        <div class="menu-option" id="participate-vote">Participate in Club Vote</div>
+        <div class="menu-option" id="participate-blog">Participate in Blog</div>
+        <div class="menu-option" id="nft-option">Buy or Create an NFT</div>
+    </div>
+
     <!-- Voting Section -->
     <div id="voting-section">
         <h3>Which Jersey do you like more?</h3>
         <button id="vote-jersey1">Jersey 1</button>
         <button id="vote-jersey2">Jersey 2</button>
+        <span class="return-menu">Return to Menu</span>
+    </div>
+
+    <!-- Blog Section -->
+    <div id="blog-section">
+        <h3>Welcome to the Blog</h3>
+        <p>This is a mimic blog for demonstration purposes.</p>
+        <span class="return-menu">Return to Menu</span>
+    </div>
+
+    <!-- NFT Section -->
+    <div id="nft-section">
+        <h3>Buy or Create an NFT</h3>
+        <p>This is a mimic NFT marketplace for demonstration purposes.</p>
+        <span class="return-menu">Return to Menu</span>
     </div>
 
     <!-- Thank You Message -->
