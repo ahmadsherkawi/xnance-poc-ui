@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             console.log('Connected account:', accounts[0]);
-            document.getElementById('wallet-address').innerText = accounts[0];
+            document.getElementById('wallet-address').innerText = "Connected Wallet Address: " + accounts[0];
         } catch (error) {
             console.error('Error connecting wallet:', error);
         }
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (balance.lt(amount)) {
                 console.error('Insufficient balance for transfer');
-                document.getElementById('contract-value').innerText = 'Insufficient token balance';
+                document.getElementById('contract-value-message').innerText = 'Insufficient token balance';
                 return;
             }
 
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (allowance.lt(amount)) {
                 console.error('Insufficient token allowance for contract to perform transfer');
-                document.getElementById('contract-value').innerText = 'Insufficient token allowance. Approving tokens...';
+                document.getElementById('contract-value-message').innerText = 'Insufficient token allowance. Approving tokens...';
 
                 // Approve the contract to spend tokens
                 const tx = await despTokenContract.approve(playerTransferContract.address, amount);
@@ -85,13 +85,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log('Tokens approved for transfer.');
 
                 // Display approval success on the page
-                document.getElementById('contract-value').innerText = 'Tokens approved for transfer.';
+                document.getElementById('contract-value-message').innerText = 'Tokens approved for transfer.';
             }
 
             // Now that tokens are approved, initiate the transfer
             await playerTransferContract.initiateTransfer(playerId, fromClub, toClub, amount);
             console.log('Player transfer initiated.');
-            document.getElementById('contract-value').innerText = 'Player transfer initiated.';
+            document.getElementById('contract-value-message').innerText = 'Player transfer initiated.';
 
             // Optionally, check the status of the transfer
             const transfer = await playerTransferContract.transfers(playerId);
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } catch (error) {
             console.error('Error interacting with contract:', error.message);
             console.error('Full error details:', error);
-            document.getElementById('contract-value').innerText = `Error: ${error.message}`;
+            document.getElementById('contract-value-message').innerText = `Error: ${error.message}`;
         }
     }
 
