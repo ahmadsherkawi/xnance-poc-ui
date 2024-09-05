@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (balance.lt(amount)) {
                 console.error('Insufficient balance for transfer');
+                document.getElementById('contract-value').innerText = 'Insufficient token balance';
                 return;
             }
 
@@ -76,11 +77,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (allowance.lt(amount)) {
                 console.error('Insufficient token allowance for contract to perform transfer');
-                return;
+                document.getElementById('contract-value').innerText = 'Insufficient token allowance. Approving tokens...';
+
+                // Approve the contract to spend tokens
+                const tx = await despTokenContract.approve(playerTransferContract.address, amount);
+                await tx.wait();
+                console.log('Tokens approved for transfer.');
+
+                // Display approval success on the page
+                document.getElementById('contract-value').innerText = 'Tokens approved for transfer.';
             }
 
+            // Now that tokens are approved, initiate the transfer
             await playerTransferContract.initiateTransfer(playerId, fromClub, toClub, amount);
             console.log('Player transfer initiated.');
+            document.getElementById('contract-value').innerText = 'Player transfer initiated.';
 
             // Optionally, check the status of the transfer
             const transfer = await playerTransferContract.transfers(playerId);
@@ -89,6 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } catch (error) {
             console.error('Error interacting with contract:', error.message);
             console.error('Full error details:', error);
+            document.getElementById('contract-value').innerText = `Error: ${error.message}`;
         }
     }
 
