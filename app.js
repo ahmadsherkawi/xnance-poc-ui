@@ -25,120 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log('Initializing contract interaction...');
         
         // Replace with your contract's ABI and address
-        const contractABI = [
-            {
-                "inputs": [
-                    {
-                        "internalType": "address",
-                        "name": "_despTokenAddress",
-                        "type": "address"
-                    }
-                ],
-                "stateMutability": "nonpayable",
-                "type": "constructor"
-            },
-            {
-                "inputs": [
-                    {
-                        "internalType": "uint256",
-                        "name": "playerId",
-                        "type": "uint256"
-                    }
-                ],
-                "name": "acceptTransfer",
-                "outputs": [],
-                "stateMutability": "nonpayable",
-                "type": "function"
-            },
-            {
-                "inputs": [],
-                "name": "despToken",
-                "outputs": [
-                    {
-                        "internalType": "contract IERC20",
-                        "name": "",
-                        "type": "address"
-                    }
-                ],
-                "stateMutability": "view",
-                "type": "function"
-            },
-            {
-                "inputs": [
-                    {
-                        "internalType": "uint256",
-                        "name": "playerId",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "address",
-                        "name": "fromClub",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "address",
-                        "name": "toClub",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "amount",
-                        "type": "uint256"
-                    }
-                ],
-                "name": "initiateTransfer",
-                "outputs": [],
-                "stateMutability": "nonpayable",
-                "type": "function"
-            },
-            {
-                "inputs": [
-                    {
-                        "internalType": "uint256",
-                        "name": "playerId",
-                        "type": "uint256"
-                    }
-                ],
-                "name": "rejectTransfer",
-                "outputs": [],
-                "stateMutability": "nonpayable",
-                "type": "function"
-            },
-            {
-                "inputs": [
-                    {
-                        "internalType": "uint256",
-                        "name": "",
-                        "type": "uint256"
-                    }
-                ],
-                "name": "transfers",
-                "outputs": [
-                    {
-                        "internalType": "address",
-                        "name": "fromClub",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "address",
-                        "name": "toClub",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "amount",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "enum PlayerTransfer.TransferStatus",
-                        "name": "status",
-                        "type": "uint8"
-                    }
-                ],
-                "stateMutability": "view",
-                "type": "function"
-            }
-        ];
+        const contractABI = [ /* your ABI array */ ];
 
         const contractAddress = '0xF69b6d416F2d1E82A2F6C85fF710c1cC0A774BE8';  // Your actual deployed contract address
 
@@ -154,7 +41,8 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log('DeSp Token Address:', despTokenAddress);
             document.getElementById('contract-value').innerText = despTokenAddress;
         } catch (error) {
-            console.error('Error interacting with contract:', error);
+            console.error('Error interacting with contract:', error.message);
+            console.error('Full error details:', error);
         }
     }
 
