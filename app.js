@@ -26,8 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
         
         // Replace with your contract's ABI and address
         const contractABI = [ /* your ABI array */ ];
-
-        const contractAddress = '0xF69b6d416F2d1E82A2F6C85fF710c1cC0A774BE8';  // Your actual deployed contract address
+        const contractAddress = '0xF69b6d416F2d1E82A2F6C85fF710c1cC0A774BE8'; // Your PlayerTransfer contract address
 
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
@@ -36,10 +35,12 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log('Contract instantiated:', contract);
 
         try {
-            // Example call to a read function
-            const despTokenAddress = await contract.despToken();
-            console.log('DeSp Token Address:', despTokenAddress);
-            document.getElementById('contract-value').innerText = despTokenAddress;
+            const connectedAccount = await signer.getAddress();
+            
+            // Example: fetch the balance of the connected account
+            const balance = await contract.balanceOf(connectedAccount);
+            console.log('Balance:', balance.toString());
+            document.getElementById('contract-value').innerText = balance.toString();
         } catch (error) {
             console.error('Error interacting with contract:', error.message);
             console.error('Full error details:', error);
