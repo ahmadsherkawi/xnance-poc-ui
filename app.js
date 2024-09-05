@@ -23,42 +23,60 @@ document.addEventListener("DOMContentLoaded", function () {
     // Interact with deployed smart contracts
     async function initContracts() {
         console.log('Initializing contract interaction...');
-        
-        // Replace with your actual ABI
+    
         const contractABI = [
             "function initiateTransfer(uint256 playerId, address fromClub, address toClub, uint256 amount) public",
             "function acceptTransfer(uint256 playerId) public",
             "function rejectTransfer(uint256 playerId) public",
             "function transfers(uint256) public view returns (address fromClub, address toClub, uint256 amount, uint8 status)"
         ];
-
+    
         const contractAddress = '0xF69b6d416F2d1E82A2F6C85fF710c1cC0A774BE8'; // Your PlayerTransfer contract address
-
+    
         try {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
             const contract = new ethers.Contract(contractAddress, contractABI, signer);
             console.log('Contract instantiated:', contract);
-
-            // Use your wallet address for both fromClub and toClub
+    
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             const playerId = 1; 
-            const fromClub = accounts[0]; // Your wallet address
-            const toClub = accounts[0]; // Same wallet address for trial
+            const fromClub = accounts[0]; // Use your wallet address
+            const toClub = accounts[0]; // Use the same wallet address for trial
             const amount = ethers.utils.parseUnits("10", "ether");
-
+    
+            // Check if the fromClub has enough balance
+            const balance = await contract.despToken.balanceOf(fromClub);
+            console.log('Token balance of fromClub:', balance.toString());
+    
+            if (balance.lt(amount)) {
+                console.error('Insufficient balance for transfer');
+                return;
+            }
+    
+            // Ensure the fromClub has approved enough tokens
+            const allowance = await contract.despToken.allowance(fromClub, contract.address);
+            console.log('Allowance of contract:', allowance.toString());
+    
+            if (allowance.lt(amount)) {
+                console.error('Insufficient token allowance for contract to perform transfer');
+                return;
+            }
+    
             await contract.initiateTransfer(playerId, fromClub, toClub, amount);
+            gasLimit: ethers.utils.hexlify(1000000)
             console.log('Player transfer initiated.');
-
+    
             // Optionally, check the status of the transfer
             const transfer = await contract.transfers(playerId);
             console.log('Transfer status:', transfer.status);
-
+    
         } catch (error) {
             console.error('Error interacting with contract:', error.message);
             console.error('Full error details:', error);
         }
     }
+    
 
     // Event listeners for buttons
     document.getElementById('connect-wallet-btn').addEventListener('click', connectWallet);
