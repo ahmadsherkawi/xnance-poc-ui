@@ -24,26 +24,31 @@ document.addEventListener("DOMContentLoaded", function () {
     async function initContracts() {
         console.log('Initializing contract interaction...');
         
-        // Replace with your contract's ABI and address
-        const contractABI = [ /* Your ABI array for PlayerTransfer contract */ ];
+        // Replace with your actual ABI
+        const contractABI = [
+            "function initiateTransfer(uint256 playerId, address fromClub, address toClub, uint256 amount) public",
+            "function acceptTransfer(uint256 playerId) public",
+            "function rejectTransfer(uint256 playerId) public",
+            "function transfers(uint256) public view returns (address fromClub, address toClub, uint256 amount, uint8 status)"
+        ];
+
         const contractAddress = '0xF69b6d416F2d1E82A2F6C85fF710c1cC0A774BE8'; // Your PlayerTransfer contract address
 
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        const contract = new ethers.Contract(contractAddress, contractABI, signer);
-
-        console.log('Contract instantiated:', contract);
-
         try {
-            // Example: Call initiateTransfer function on the contract
-            const playerId = 1; // Example player ID
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
+            const contract = new ethers.Contract(contractAddress, contractABI, signer);
+            console.log('Contract instantiated:', contract);
+
+            // Example interaction: Initiating a transfer
+            const playerId = 1; 
             const fromClub = '0xYourClubAddress'; // Replace with actual club address
             const toClub = '0xAnotherClubAddress'; // Replace with actual club address
             const amount = ethers.utils.parseUnits("10", "ether");
 
             await contract.initiateTransfer(playerId, fromClub, toClub, amount);
             console.log('Player transfer initiated.');
-            
+
             // Optionally, check the status of the transfer
             const transfer = await contract.transfers(playerId);
             console.log('Transfer status:', transfer.status);
