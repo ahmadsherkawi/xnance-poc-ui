@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xnance Proof of Concept</title>
     <link rel="stylesheet" href="style.css">
-    <script src="app1.js" defer></script>
+    <script src="app3.js" defer></script> <!-- Updated to app3.js -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,10 +24,10 @@
             border-radius: 10px;
             display: none;
         }
-        #registration-section, #menu-section, #voting-section, #thank-you-message, #blog-section, #nft-section, #blockchain-section, #wallet-balance-section {
+        #user-selection, #registration-section, #menu-section, #voting-section, #thank-you-message, #blog-section, #nft-section, #wallet-balance-section, #fundraising-section {
             display: none;
         }
-        #thank-you-message, #blog-section, #nft-section, #wallet-balance-section {
+        #thank-you-message, #blog-section, #nft-section, #wallet-balance-section, #fundraising-section {
             font-size: 18px;
             color: green;
         }
@@ -50,6 +50,15 @@
 
     <h1 style="text-align: center;">Xnance Proof of Concept</h1>
 
+    <!-- User Type Selection -->
+    <div id="user-selection">
+        <h3>Select User Type</h3>
+        <button id="fan-btn">Fan</button>
+        <button id="club-btn">Club</button>
+        <button id="federation-btn">Federation</button>
+        <button id="contractor-btn">Contractor</button>
+    </div>
+
     <!-- APS Score Display -->
     <div id="aps-score">APS Score: 0</div>
 
@@ -63,14 +72,41 @@
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required><br><br>
 
-            <label for="favorite-club">Favorite Club:</label>
-            <select id="favorite-club" name="favorite-club" required>
-                <option value="FootyFooty">FootyFooty</option>
-                <option value="Royal Footy">Royal Footy</option>
-                <option value="GoalMasters">GoalMasters</option>
-                <option value="KickWonders">KickWonders</option>
-                <option value="FootyLegends">FootyLegends</option>
-            </select><br><br>
+            <!-- Club and Federation Specific Fields (hidden by default) -->
+            <div id="club-registration-fields" style="display: none;">
+                <label for="club-name">Club Name:</label>
+                <input type="text" id="club-name"><br><br>
+
+                <label for="club-federation">Federation:</label>
+                <select id="club-federation">
+                    <option value="Asian">Asian</option>
+                    <option value="Euro">Euro</option>
+                    <option value="African">African</option>
+                </select><br><br>
+            </div>
+
+            <div id="federation-registration-fields" style="display: none;">
+                <label for="federation-name">Federation Name:</label>
+                <input type="text" id="federation-name"><br><br>
+
+                <label for="region">Region:</label>
+                <select id="region">
+                    <option value="Asia">Asia</option>
+                    <option value="Europe">Europe</option>
+                    <option value="Africa">Africa</option>
+                </select><br><br>
+            </div>
+
+            <div id="contractor-registration-fields" style="display: none;">
+                <label for="business-name">Business Name:</label>
+                <input type="text" id="business-name"><br><br>
+
+                <label for="business-type">Business Type:</label>
+                <input type="text" id="business-type" placeholder="Event Management, Construction..."><br><br>
+            </div>
+
+            <label for="wallet-address-input">Wallet Address:</label>
+            <input type="text" id="wallet-address-input" placeholder="0xYourWalletAddress"><br><br>
 
             <button type="submit">Submit</button>
         </form>
@@ -87,8 +123,8 @@
         <div class="menu-option" id="participate-blog">Participate in Blog</div>
         <div class="menu-option" id="nft-option">Buy or Create an NFT</div>
         <div class="menu-option" id="view-balance">View Wallet Balance</div>
-        <div class="menu-option" id="view-transactions">View Transaction History</div>
-        <div class="menu-option" id="token-transfer">Send a Token</div>
+        <div class="menu-option" id="token-staking">Stake Tokens</div>
+        <div class="menu-option" id="fundraising">Start a Fundraising Campaign (For Clubs)</div>
     </div>
 
     <!-- Voting Section -->
@@ -120,21 +156,20 @@
         <span class="return-menu">Return to Menu</span>
     </div>
 
-    <!-- Blockchain Section: Transaction History -->
-    <div id="transaction-history-section">
-        <h3>Your Transaction History</h3>
-        <ul id="transaction-list"></ul>
+    <!-- Token Staking Section -->
+    <div id="staking-section">
+        <h3>Stake Your Tokens</h3>
+        <input type="text" id="staking-amount" placeholder="Amount to Stake"><br><br>
+        <button id="stake-token-btn">Stake Tokens</button>
         <span class="return-menu">Return to Menu</span>
     </div>
 
-    <!-- Blockchain Section: Token Transfer -->
-    <div id="token-transfer-section">
-        <h3>Send a Token</h3>
-        <label for="recipient-address">Recipient Address:</label>
-        <input type="text" id="recipient-address" placeholder="0x..."><br><br>
-        <label for="transfer-amount">Amount to Send:</label>
-        <input type="text" id="transfer-amount" placeholder="Amount"><br><br>
-        <button id="send-token-btn">Send Token</button>
+    <!-- Fundraising Section -->
+    <div id="fundraising-section">
+        <h3>Start a Fundraising Campaign</h3>
+        <label for="fund-amount">Fundraising Amount:</label>
+        <input type="text" id="fund-amount" placeholder="Enter amount"><br><br>
+        <button id="start-fundraising-btn">Start Fundraising</button>
         <span class="return-menu">Return to Menu</span>
     </div>
 
